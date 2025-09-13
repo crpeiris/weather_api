@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Weather App</h1>
+    <form method="POST">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Get Weather</button>
+    </form>
+
+    {% if weather_data %}
+      <div class="weather-info">
+        <h2>{{ weather_data.city }}</h2>
+        <p>Temperature: {{ weather_data.temperature }} °C</p>
+        <p>Country: {{ weather_data.country }}</p>
+        <p>City entered: {{ weather_data.city_entered }}</p>
+
+        <h1>Weather Report</h1>
+        {% for key, value in response01.items %}
+          <h2>{{ key|capfirst }} Data</h2>
+          <ul>
+            {% for sub_key, sub_value in value.items %}
+              {% if sub_key == 'condition' %}
+                <li>
+                  <strong>Condition:</strong>
+                  <ul>
+                    {% for cond_key, cond_value in sub_value.items %}
+                      <li>{{ cond_key|capfirst }}: {{ cond_value }}</li>
+                    {% endfor %}
+                  </ul>
+                </li>
+              {% else %}
+                <li><strong>{{ sub_key|capfirst }}:</strong> {{ sub_value }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  </body>
+</html>

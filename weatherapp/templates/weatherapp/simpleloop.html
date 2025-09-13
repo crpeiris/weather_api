@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Weather App</h1>
+    <form method="POST">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Get Weather</button>
+    </form>
+
+  {% if res_object %}
+  
+  <h2>Location Info</h2>
+  <ul>
+    {% for key, value in res_object.location.items %}
+      <li>{{ key }}: {{ value }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Current Weather</h2>
+    <ul>
+      {% for key, value in res_object.current.items %}
+        {% if value.items %}
+          <!-- Handle nested dict like 'condition' -->
+          <li>{{ key }}:</li>
+          <ul>
+            {% for subkey, subvalue in value.items %}
+              <li>{{ subkey }}: {{ subvalue }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <li>{{ key }}: {{ value }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    
+          
+  {% endif %}
+
+    </body>
+</html>
