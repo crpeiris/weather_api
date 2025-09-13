@@ -6,36 +6,42 @@
       {% csrf_token %} {{ form.as_p }}
       <button type="submit">Get Weather</button>
     </form>
-
+    
+    <h1>Weather Report</h1>
     {% if weather_data %}
       <div class="weather-info">
         <h2>{{ weather_data.city }}</h2>
-        <p>Temperature: {{ weather_data.temperature }} °C</p>
         <p>Country: {{ weather_data.country }}</p>
-        <p>City entered: {{ weather_data.city_entered }}</p>
-
-        <h1>Weather Report</h1>
-        {% for key, value in response01.items %}
-          <h2>{{ key|capfirst }} Data</h2>
-          <ul>
-            {% for sub_key, sub_value in value.items %}
-              {% if sub_key == 'condition' %}
-                <li>
-                  <strong>Condition:</strong>
-                  <ul>
-                    {% for cond_key, cond_value in sub_value.items %}
-                      <li>{{ cond_key|capfirst }}: {{ cond_value }}</li>
-                    {% endfor %}
-                  </ul>
-                </li>
-              {% else %}
-                <li><strong>{{ sub_key|capfirst }}:</strong> {{ sub_value }}</li>
-              {% endif %}
-            {% endfor %}
-          </ul>
-        {% endfor %}
-      </div>
+        <p>You entered: {{ weather_data.city_entered }}</p>
+        <p>Temperature: {{ weather_data.temperature }} °C</p> 
+        <p>Condition: {{ weather_data.text }}
+        <img src="{{ weather_data.icon }}" alt="wether icon">
+        </p>
     {% endif %}
+
+    <div id="map" style="height:300px;width:400px;"></div>
+
+    
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHWDOBPsfOvDoeyBx-CPg-mhiBJaf1bzM&callback=initMap">
+    </script>
+
+
+    <script>
+    function initMap() {
+    const location = { lat: {{ weather_data.lat }}, lng: {{ weather_data.lon }} };
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 12,
+        center: location
+    });
+    new google.maps.Marker({
+        position: location,
+        map: map,
+        title: "{{ weather.location.name }}"
+    });
+    }
+    </script>
+
 
   </body>
 </html>

@@ -13,9 +13,13 @@ def weatherhome(request):
             response = requests.get(url.format(city)).json()
             weather_data = {
                 'city_entered': city,
-                'temperature': response['current']['temp_c'],
                 'city': response['location']['name'],
+                'temperature': response['current']['temp_c'],
+                'text': response['current']['condition']['text'],
+                'icon': response['current']['condition']['icon'],
                 'country': response['location']['country'],
+                'lat' : response['location']['lat'],
+                'lon' : response['location']['lon'],
             }
         else:
             weather_data = {}
