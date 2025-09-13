@@ -2,6 +2,7 @@
 <html>
   <body>
     <h1>Weather App</h1>
+  
     <form method="POST">
       {% csrf_token %} {{ form.as_p }}
       <button type="submit">Get Weather</button>
@@ -12,7 +13,6 @@
     {% if error_msg %}
         <p style="color:red;">{{ error_msg }}</p>
     {% endif %}
-
 
     {% if weather_data %}
       <div class="weather-info">

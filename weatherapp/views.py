@@ -47,6 +47,7 @@ def weatherhome(request):
 # A view to pass the Json object as it is to the template.
 def weatherloop(request):
     api_key = '9bf50f1140004b98835191651251209'
+
     if request.method == 'POST':
         form = CityForm(request.POST)
         if form.is_valid():
