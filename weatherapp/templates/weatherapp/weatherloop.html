@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <h1>Weather App Advanced <a href="{% url 'weathersimple' %}"> | >> Simple view</a></h1>
+    <h2>Weather App Advanced <a href="{% url 'weathersimple' %}"> | >> Simple view</a></h2>
     <form method="POST">
       {% csrf_token %} {{ form.as_p }}
       <button type="submit">Get Weather</button>

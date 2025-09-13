@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <h1>Weather App Simple <a href="{% url 'weatherloop' %}"> | >> Advanced view</a> </h1>
+    <h2>Weather App Simple <a href="{% url 'weatherloop' %}"> | >> Advanced view</a> </h2>
     <form method="POST">
       {% csrf_token %} {{ form.as_p }}
       <button type="submit">Get Weather</button>
     </form>
     
-    <h1>Weather Report</h1>
-
     {% if error_msg %}
         <p style="color:red;">{{ error_msg }}</p>
     {% endif %}
 
     {% if weather_data %}
+    <h2>Weather Report</h2>
       <div class="weather-info">
         <h2>{{ weather_data.city }}</h2>
         <p>Country: {{ weather_data.country }}</p>
