@@ -28,7 +28,7 @@
             {% endfor %}
           </ul>
         {% else %}
-          <li>{{ key }}: {{ value }}</li>
+          <li>{{ key|capfirst }}: {{ value }}</li>
         {% endif %}
       {% endfor %}
     </ul>
