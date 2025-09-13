@@ -20,7 +20,7 @@
     <ul>
       {% for key, value in res_object.current.items %}
         {% if value.items %}
-          <!-- Handle nested dict like 'condition' -->
+          <!-- Handle nested dictionary like 'condition' -->
           <li>{{ key }}:</li>
           <ul>
             {% for subkey, subvalue in value.items %}
@@ -28,7 +28,7 @@
             {% endfor %}
           </ul>
         {% else %}
-          <li>{{ key|capfirst }}: {{ value }}</li>
+          <li>{{ key }}: {{ value }}</li>
         {% endif %}
       {% endfor %}
     </ul>
