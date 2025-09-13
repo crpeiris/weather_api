@@ -8,6 +8,12 @@
     </form>
     
     <h1>Weather Report</h1>
+
+    {% if error_msg %}
+        <p style="color:red;">{{ error_msg }}</p>
+    {% endif %}
+
+
     {% if weather_data %}
       <div class="weather-info">
         <h2>{{ weather_data.city }}</h2>
@@ -17,13 +23,12 @@
         <p>Condition: {{ weather_data.text }}
         <img src="{{ weather_data.icon }}" alt="wether icon">
         </p>
-    {% endif %}
 
     <div id="map" style="height:300px;width:400px;"></div>
 
     
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHWDOBPsfOvDoeyBx-CPg-mhiBJaf1bzM&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key={{google_maps_key}}&callback=initMap">
     </script>
 
 
@@ -42,6 +47,7 @@
     }
     </script>
 
+    {% endif %}
 
   </body>
 </html>
