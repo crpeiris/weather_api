@@ -60,3 +60,21 @@ def weatherloop(request):
         form = CityForm()
         response = {}
     return render(request, 'weatherapp/weatherloop.html', {'form': form,'res_object' : response })
+
+
+# A view to pass the Json object as it is to the template.
+def htmlform(request):
+    api_key = '9bf50f1140004b98835191651251209'
+
+    if request.method == 'POST':
+        city = request.POST.get('city', '').strip()
+        if city:
+            url = f'http://api.weatherapi.com/v1/current.json?q={city}&key={api_key}'
+            response = requests.get(url).json()
+        # else: leave response empty for invalid input
+        else:
+            weather_data = {}
+    else:
+        form = CityForm()
+        response = {}
+    return render(request, 'weatherapp/htmlform.html', {'res_object' : response })

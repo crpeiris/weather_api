@@ -4,4 +4,5 @@ from . import views
 urlpatterns = [
         path('',views.weatherhome, name= 'weathersimple'),
         path('/weatherloop',views.weatherloop, name = 'weatherloop'),
+        path('/htmlform',views.htmlform, name = 'htmlform'),
 ]
